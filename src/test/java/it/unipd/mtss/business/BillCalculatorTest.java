@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////
 package it.unipd.mtss.business;
 
+import it.unipd.mtss.business.exception.BillException;
 import it.unipd.mtss.model.EItem;
 import it.unipd.mtss.model.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +35,7 @@ public class BillCalculatorTest {
     }
 
     @Test
-    public void testSimpleGetOrderPrice() {
+    public void testSimpleGetOrderPrice() throws BillException {
         assertEquals(630d, this.calculator.getOrderPrice(items, user));
     }
 
@@ -54,7 +55,7 @@ public class BillCalculatorTest {
     }
 
     @Test
-    public void test5ProcessorsDiscount() {
+    public void test5ProcessorsDiscount() throws BillException {
         this.items.add(new EItem(EItem.ItemType.Processor, "Processore1", 310d));
         this.items.add(new EItem(EItem.ItemType.Processor, "Processore2", 320d));
         this.items.add(new EItem(EItem.ItemType.Processor, "Processore3", 330d));
@@ -65,7 +66,7 @@ public class BillCalculatorTest {
     }
 
     @Test
-    public void test10MiceDiscount() {
+    public void test10MiceDiscount() throws BillException {
         for (int i = 1; i <= 11; ++i) {
             this.items.add(new EItem(EItem.ItemType.Mouse, "Mouse " + i, i * 10));
         }
@@ -74,14 +75,23 @@ public class BillCalculatorTest {
     }
 
     @Test
-    public void testMiceKeyboardsGift() {
+    public void testMiceKeyboardsGift() throws BillException {
         this.items.add(new EItem(EItem.ItemType.Mouse, "Mouse1", 70d));
         assertEquals(640d, this.calculator.getOrderPrice(items, user));
     }
 
     @Test
-    public void test1000EurosDiscount() {
+    public void test1000EurosDiscount() throws BillException {
         this.items.add(new EItem(EItem.ItemType.Processor, "Intel Xeon 6256", 4000d));
         assertEquals((630d + 4000d) * 0.90, this.calculator.getOrderPrice(this.items, this.user));
+    }
+
+    @Test
+    public void testMoreThan30Items() {
+        for (int i = 0; i < 26; i++) {
+            this.items.add(new EItem(EItem.ItemType.Mouse, "Mouse " + i, 50));
+        }
+        BillException exception = assertThrows(BillException.class, () -> this.calculator.getOrderPrice(items, user));
+        assertEquals("Items list can't contain more than 30 items!", exception.getMessage());
     }
 }
