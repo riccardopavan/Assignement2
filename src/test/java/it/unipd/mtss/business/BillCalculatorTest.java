@@ -63,4 +63,13 @@ public class BillCalculatorTest {
 
         assertEquals(630d + 1650d - 150d, this.calculator.getOrderPrice(items, user));
     }
+
+    @Test
+    public void test10MiceDiscount() {
+        for (int i = 1; i <= 10; ++i) {
+            this.items.add(new EItem(EItem.ItemType.Mouse, "Mouse " + i, i * 10));
+        }
+
+        assertEquals(630d + 540d, this.calculator.getOrderPrice(items, user));
+    }
 }
