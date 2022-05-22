@@ -31,6 +31,9 @@ public class BillCalculator {
         Discount10Mice discount10Mice = new Discount10Mice();
         partialTotal -= discount10Mice.getDiscount(itemsOrdered);
 
+        GiftMiceKeyboards giftMiceKeyboards = new GiftMiceKeyboards();
+        partialTotal -= giftMiceKeyboards.getGift(itemsOrdered);
+
         return partialTotal;
     }
 }
