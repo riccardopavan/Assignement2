@@ -14,25 +14,54 @@ public class EItem {
         Keyboard
     }
 
-    public EItem(ItemType itemType, String name, double price) {
+    private final ItemType itemType;
+    private final String name;
+    private final double price;
+    private LocalTime time;
+
+    public EItem(ItemType itemType, String name, double price)
+            throws IllegalArgumentException {
+        if (itemType == null) {
+            throw new IllegalArgumentException("Il tipo non può essere nullo");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("Il nome non può essere nullo");
+        }
+        if (price < 0) {
+            throw new IllegalArgumentException
+                    ("Il prezzo non può essere negativo");
+        }
+        if (name.equals("")) {
+            throw new IllegalArgumentException("Il nome non può essere vuoto");
+        }
+
+        this.itemType = itemType;
+        this.name = name;
+        this.price = price;
+        this.time = LocalTime.now();
     }
 
     public String getName() {
-        return null;
+        return name;
     }
 
     public ItemType getItemType() {
-        return null;
+        return itemType;
     }
 
     public double getPrice() {
-        return 0d;
+        return price;
     }
 
     public LocalTime getTime() {
-        return null;
+        return time;
     }
 
     public void setTime(LocalTime time) throws IllegalArgumentException {
+        if (time == null) {
+            throw new IllegalArgumentException("L'orario non può essere nullo");
+        }
+
+        this.time = time;
     }
 }
