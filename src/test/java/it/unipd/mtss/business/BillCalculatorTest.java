@@ -61,7 +61,7 @@ public class BillCalculatorTest {
         this.items.add(new EItem(EItem.ItemType.Processor, "Processore4", 340d));
         this.items.add(new EItem(EItem.ItemType.Processor, "Processore5", 350d));
 
-        assertEquals(630d + 1650d - 150d, this.calculator.getOrderPrice(items, user));
+        assertEquals((630d + 1650d - 150d) * 0.90, this.calculator.getOrderPrice(items, user));
     }
 
     @Test
@@ -70,12 +70,18 @@ public class BillCalculatorTest {
             this.items.add(new EItem(EItem.ItemType.Mouse, "Mouse " + i, i * 10));
         }
 
-        assertEquals(630d + 650d, this.calculator.getOrderPrice(items, user));
+        assertEquals((630d + 650d) * 0.90, this.calculator.getOrderPrice(items, user));
     }
 
     @Test
     public void testMiceKeyboardsGift() {
         this.items.add(new EItem(EItem.ItemType.Mouse, "Mouse1", 70d));
         assertEquals(640d, this.calculator.getOrderPrice(items, user));
+    }
+
+    @Test
+    public void test1000EurosDiscount() {
+        this.items.add(new EItem(EItem.ItemType.Processor, "Intel Xeon 6256", 4000d));
+        assertEquals((630d + 4000d) * 0.90, this.calculator.getOrderPrice(this.items, this.user));
     }
 }
