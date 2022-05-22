@@ -34,6 +34,7 @@ public class BillCalculator {
         GiftMiceKeyboards giftMiceKeyboards = new GiftMiceKeyboards();
         partialTotal -= giftMiceKeyboards.getGift(itemsOrdered);
 
-        return partialTotal;
+        Discount1000Euros discount1000Euros = new Discount1000Euros();
+        return partialTotal - discount1000Euros.getDiscount(partialTotal);
     }
 }
