@@ -11,6 +11,18 @@ import java.util.List;
 
 public class BillCalculator {
     public double getOrderPrice(List<EItem> itemsOrdered, User user) {
-        return 0;
+        if (itemsOrdered == null) {
+            throw new IllegalArgumentException("Items list can't be null!");
+        }
+        if (itemsOrdered.isEmpty()) {
+            throw new IllegalArgumentException("Items list can't be empty!");
+        }
+        if (user == null) {
+            throw new IllegalArgumentException("User can't be null!");
+        }
+
+        return itemsOrdered.stream()
+                .mapToDouble(EItem::getPrice)
+                .sum();
     }
 }

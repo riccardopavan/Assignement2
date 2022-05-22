@@ -4,14 +4,11 @@
 ////////////////////////////////////////////////////////////////////
 package it.unipd.mtss.business;
 
-import it.unipd.mtss.business.exception.BillException;
 import it.unipd.mtss.model.EItem;
-import it.unipd.mtss.model.EItem.ItemType;
 import it.unipd.mtss.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,13 +34,13 @@ public class BillCalculatorTest {
     }
 
     @Test
-    public void testSimpleGetOrderPrice() throws BillException {
+    public void testSimpleGetOrderPrice() {
         assertEquals(630d, this.calculator.getOrderPrice(items, user));
     }
 
     @Test
-    public void testEmptyList() throws BillException {
-        assertThrows(IllegalArgumentException.class, () -> this.calculator.getOrderPrice(new ArrayList<EItem>(), user));
+    public void testEmptyList() {
+        assertThrows(IllegalArgumentException.class, () -> this.calculator.getOrderPrice(new ArrayList<>(), user));
     }
 
     @Test
