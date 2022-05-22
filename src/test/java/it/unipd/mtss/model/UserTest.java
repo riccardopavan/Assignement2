@@ -46,4 +46,22 @@ public class UserTest {
     public void testNameEmpty() {
         assertThrows(IllegalArgumentException.class, () -> new User("", age));
     }
+
+    @Test
+    public void testIsWinner() {
+        user = new User("Cosimo", 15);
+        assertTrue(user.isWinner());
+    }
+
+    @Test
+    public void testIsNotWinnerBecauseAge() {
+        user = new User("Cosimo", 19);
+        assertFalse(user.isWinner());
+    }
+
+    @Test
+    public void testIsNotWinnerBecauseBadName() {
+        user = new User("Fiona", 17);
+        assertFalse(user.isWinner());
+    }
 }

@@ -74,4 +74,16 @@ public class EItemTest {
     public void testSetTimeNull() {
         assertThrows(IllegalArgumentException.class, () -> item.setTime(null));
     }
+
+    @Test
+    public void testIsDuringWinningTime() {
+        item.setTime(LocalTime.of(18, 30, 0));
+        assertTrue(item.isDuringWinningTime());
+    }
+
+    @Test
+    public void testIsNotDuringWinningTime() {
+        item.setTime(LocalTime.of(17, 30, 0));
+        assertFalse(item.isDuringWinningTime());
+    }
 }
