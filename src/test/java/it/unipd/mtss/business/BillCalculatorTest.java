@@ -94,4 +94,13 @@ public class BillCalculatorTest {
         BillException exception = assertThrows(BillException.class, () -> this.calculator.getOrderPrice(items, user));
         assertEquals("Items list can't contain more than 30 items!", exception.getMessage());
     }
+
+    @Test
+    public void test2EurosFee() throws BillException {
+        this.items = new ArrayList<>();
+        this.items.add(new EItem(EItem.ItemType.Mouse, "Mouse", 3));
+        this.items.add(new EItem(EItem.ItemType.Motherboard, "Motherboard", 6));
+
+        assertEquals(11d, this.calculator.getOrderPrice(this.items, this.user));
+    }
 }
