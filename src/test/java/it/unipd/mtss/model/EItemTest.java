@@ -82,8 +82,14 @@ public class EItemTest {
     }
 
     @Test
-    public void testIsNotDuringWinningTime() {
+    public void testIsNotDuringWinningTimeBefore() {
         item.setTime(LocalTime.of(17, 30, 0));
+        assertFalse(item.isDuringWinningTime());
+    }
+
+    @Test
+    public void testIsNotDuringWinningTimeAfter() {
+        item.setTime(LocalTime.of(19, 30, 0));
         assertFalse(item.isDuringWinningTime());
     }
 }
