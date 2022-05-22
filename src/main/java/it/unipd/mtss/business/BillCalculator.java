@@ -28,6 +28,9 @@ public class BillCalculator {
         Discount5Processors discount5Processors = new Discount5Processors();
         partialTotal -= discount5Processors.getDiscount(itemsOrdered);
 
+        Discount10Mice discount10Mice = new Discount10Mice();
+        partialTotal -= discount10Mice.getDiscount(itemsOrdered);
+
         return partialTotal;
     }
 }

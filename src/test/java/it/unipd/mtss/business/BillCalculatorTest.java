@@ -66,10 +66,10 @@ public class BillCalculatorTest {
 
     @Test
     public void test10MiceDiscount() {
-        for (int i = 1; i <= 10; ++i) {
+        for (int i = 1; i <= 11; ++i) {
             this.items.add(new EItem(EItem.ItemType.Mouse, "Mouse " + i, i * 10));
         }
 
-        assertEquals(630d + 540d, this.calculator.getOrderPrice(items, user));
+        assertEquals(630d + 650d, this.calculator.getOrderPrice(items, user));
     }
 }

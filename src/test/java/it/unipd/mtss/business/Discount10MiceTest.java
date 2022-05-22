@@ -21,14 +21,14 @@ public class Discount10MiceTest {
 
     @BeforeEach
     public void setUp() {
-        for (int i = 1; i <= 10; ++i) {
+        for (int i = 1; i <= 11; ++i) {
             this.items.add(new EItem(EItem.ItemType.Mouse, "Mouse " + i, i * 10));
         }
     }
 
     @Test
     public void testGetDiscount() {
-        assertEquals(540, this.discount.getDiscount(this.items));
+        assertEquals(10, this.discount.getDiscount(this.items));
     }
 
     @Test
