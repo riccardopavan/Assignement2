@@ -52,4 +52,15 @@ public class BillCalculatorTest {
     public void testUserIsNull() {
         assertThrows(IllegalArgumentException.class, () -> this.calculator.getOrderPrice(items, null));
     }
+
+    @Test
+    public void test5ProcessorsDiscount() {
+        this.items.add(new EItem(EItem.ItemType.Processor, "Processore1", 310d));
+        this.items.add(new EItem(EItem.ItemType.Processor, "Processore2", 320d));
+        this.items.add(new EItem(EItem.ItemType.Processor, "Processore3", 330d));
+        this.items.add(new EItem(EItem.ItemType.Processor, "Processore4", 340d));
+        this.items.add(new EItem(EItem.ItemType.Processor, "Processore5", 350d));
+
+        assertEquals(630d + 1650d - 150d, this.calculator.getOrderPrice(items, user));
+    }
 }
