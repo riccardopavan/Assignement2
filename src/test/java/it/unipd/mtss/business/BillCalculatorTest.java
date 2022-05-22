@@ -10,6 +10,7 @@ import it.unipd.mtss.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,5 +103,12 @@ public class BillCalculatorTest {
         this.items.add(new EItem(EItem.ItemType.Motherboard, "Motherboard", 6));
 
         assertEquals(11d, this.calculator.getOrderPrice(this.items, this.user));
+    }
+
+    @Test
+    public void testIsOrderFree() throws BillException {
+        user = new User("Cosimo", 15);
+        items.get(items.size()-1).setTime(LocalTime.of(18, 45, 0));
+        assertEquals(0, this.calculator.getOrderPrice(items, user));
     }
 }
