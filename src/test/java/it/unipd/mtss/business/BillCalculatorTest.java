@@ -72,4 +72,10 @@ public class BillCalculatorTest {
 
         assertEquals(630d + 650d, this.calculator.getOrderPrice(items, user));
     }
+
+    @Test
+    public void testMiceKeyboardsGift() {
+        this.items.add(new EItem(EItem.ItemType.Mouse, "Mouse1", 70d));
+        assertEquals(640d, this.calculator.getOrderPrice(items, user));
+    }
 }
