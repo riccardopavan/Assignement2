@@ -2,7 +2,6 @@
 // Alberto Lazari 1216747
 // Riccardo Pavan 1189938
 ////////////////////////////////////////////////////////////////////
-
 package it.unipd.mtss.model;
 
 public class User {
