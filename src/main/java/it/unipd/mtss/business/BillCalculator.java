@@ -21,8 +21,13 @@ public class BillCalculator {
             throw new IllegalArgumentException("User can't be null!");
         }
 
-        return itemsOrdered.stream()
+        double partialTotal = itemsOrdered.stream()
                 .mapToDouble(EItem::getPrice)
                 .sum();
+
+        Discount5Processors discount5Processors = new Discount5Processors();
+        partialTotal -= discount5Processors.getDiscount(itemsOrdered);
+
+        return partialTotal;
     }
 }
