@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import it.unipd.mtss.model.EItem.ItemType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Discount5ProcessorsTest {
@@ -31,10 +32,11 @@ public class Discount5ProcessorsTest {
         this.itemsList.add(new EItem(ItemType.Processor, "Processore3", 210.00));
         this.itemsList.add(new EItem(ItemType.Processor, "Processore4", 230.00));
         this.itemsList.add(new EItem(ItemType.Processor, "Processore5", 240.00));
+        this.itemsList.add(new EItem(ItemType.Processor, "Processore6", 250.00));
     }
 
     @Test
-    public void testGetDiscount() throws BillException {
+    public void testGetDiscount() {
         assertEquals(100, discount.getDiscount(itemsList));
     }
 
@@ -44,15 +46,14 @@ public class Discount5ProcessorsTest {
     }
 
     @Test
-    public void testNotEnoughItems() {
-        this.itemsList.remove(0);
+    public void testListIsEmpty() {
+        itemsList = Collections.emptyList();
         assertThrows(IllegalArgumentException.class, () -> this.discount.getDiscount(itemsList));
     }
 
     @Test
-    public void testNotEnoughProcessors() {
+    public void testNotEnoughItems() {
         this.itemsList.remove(0);
-        this.itemsList.add(new EItem(ItemType.Keyboard, "Keyboard1", 50));
-        assertThrows(BillException.class, () -> this.discount.getDiscount(itemsList));
+        assertEquals(0, this.discount.getDiscount(itemsList));
     }
 }
