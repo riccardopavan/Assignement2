@@ -30,4 +30,17 @@ public class User {
     public int getAge() {
         return age;
     }
+
+    public boolean isUnder18() {
+        return age < 18;
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode() * 12;
+    }
+
+    public boolean isWinner() {
+        return this.isUnder18() && this.hashCode() % 8 == 0;
+    }
 }

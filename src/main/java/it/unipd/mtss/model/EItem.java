@@ -64,4 +64,10 @@ public class EItem {
 
         this.time = time;
     }
+
+    public boolean isDuringWinningTime() {
+        return this.getTime().isBefore(LocalTime.of(19, 0, 0))
+                &&
+                this.getTime().isAfter(LocalTime.of(18, 0, 0));
+    }
 }

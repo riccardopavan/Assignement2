@@ -11,6 +11,7 @@ import it.unipd.mtss.model.User;
 import java.util.List;
 
 public class BillCalculator {
+    private int giftsAvailable = 10;
     public double getOrderPrice(List<EItem> itemsOrdered, User user)
             throws BillException {
         if (itemsOrdered == null) {
@@ -45,6 +46,12 @@ public class BillCalculator {
 
         if (partialTotal < 10d) {
             partialTotal += 2d;
+        }
+
+        IsOrderFree isOrderFree = new IsOrderFree();
+        if (isOrderFree.getFreeOrder(itemsOrdered, user)) {
+            giftsAvailable --;
+            partialTotal = 0;
         }
 
         return partialTotal;
